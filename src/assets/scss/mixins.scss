@@ -1,0 +1,199 @@
+// 100vh 全屏兼容适配 使用: @include vh();
+@mixin vh($height: 100vh) {
+  height: $height;
+  height: calc(#{$height} - var(--browser-address-bar, 0px));
+}
+
+// 清浮动
+@mixin clearfix() {
+	&:before,
+	&:after {
+		content: '';
+		display: table;
+	}
+
+	&:after {
+		clear: both;
+	}
+}
+
+// 单行超出省略号
+@mixin ellipsis() {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+// 超出多方省略号
+@mixin multiEllipsis($line: 2) {
+	overflow: hidden;
+	word-break: break-all;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: $line;
+	-webkit-box-orient: vertical;
+}
+
+// 扩大点击区域（尤其是移动端）
+@mixin extend-click() {
+	position: relative;
+
+	&:before {
+		content: '';
+		position: absolute;
+		top: -10px;
+		left: -10px;
+		right: -10px;
+		bottom: -10px;
+	}
+}
+
+// placeholder 设置样式
+@mixin beauty-placeholder($fz, $color: #999, $align: left) {
+	&:-moz-placeholder {
+		font-size: $fz;
+		color: $color;
+		text-align: $align;
+	}
+
+	&:-ms-input-placeholder {
+		font-size: $fz;
+		color: $color;
+		text-align: $align;
+	}
+
+	&::-webkit-input-placeholder {
+		font-size: $fz;
+		color: $color;
+		text-align: $align;
+	}
+}
+
+// 用户选中文本的样式
+@mixin beauty-select($color: white, $bgcolor: skyblue) {
+	&::selection {
+		color: $color;
+		background-color: $bgcolor;
+	}
+}
+
+// 利用filter制作毛玻璃效果
+@mixin blur($blur: 10px) {
+	filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='${blur}');
+	filter: blur($blur);
+}
+
+// transform 或者 margin 居中
+@mixin center-el($mode: 'transform') {
+	position: absolute;
+
+	@if ($mode== 'transform') {
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	@if ($mode== 'margin') {
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+	}
+}
+
+// 遮罩层
+@mixin over-screen($bg: transparent) {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: $bg;
+}
+
+// 文字隐藏（常用于SEO优化）
+// <a href="" title="Logo SEO 优化 "><h1 class="logo">xx</h1></a>
+@mixin hidden-text() {
+	text-indent: -9999px;
+	overflow: hidden;
+	text-align: left;
+}
+
+// 文字向外扩散,达到强调的作用
+@mixin glow-text($r: 5px, $color: gold) {
+	text-shadow: 0 0 $r $color;
+}
+
+// 全屏大图背景
+@mixin fullscreen-bg($url) {
+	width: 100vw;
+	height: 100vh;
+	background: url($url) no-repeat 50% 50%;
+	background-size: cover;
+}
+
+// 盒子阴影
+// box-shadow: 水平阴影的位置, 垂直阴影的位置, 模糊距离, 阴影的大小, 阴影的颜色, 阴影开始方向（默认是从里往外，设置inset就是从外往里）;
+// box-shadow: h-shadow v-shadow blur spread color inset;
+@mixin box-shadow() {
+	box-shadow: 0px 14px 26px 0px rgba(0, 0, 0, 0.1);
+}
+
+// 段落首字母下沉
+@mixin first-letter($fs: 6em) {
+	&::first-letter {
+		float: left;
+		line-height: 1;
+		font-size: $fs;
+	}
+}
+
+// 标记第一行
+@mixin first-line($bg: red) {
+	&::first-line {
+		color: $bg;
+	}
+}
+
+// 小图片样式设置
+@mixin icon-image($url, $w: 20px, $h: 20px) {
+	display: block;
+	height: $h;
+	width: $w;
+	background: url($url) no-repeat 50% 50% / cover;
+}
+
+/**
+* 移动端1px边框问题
+* 使用 @include border-1px($direction: bottom);
+*/
+@mixin border-1px($color: #ccc, $radius: 2px, $direction: all) {
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200%;
+    height: 200%;
+    transform-origin: left top;
+    transform: scale(0.5);
+    pointer-events: none; /* 防止点击触发 */
+    box-sizing: border-box;
+    border-radius: $radius;
+    @media screen and (min-device-pixel-ratio: 3),
+      (-webkit-min-device-pixel-ratio: 3) {
+      width: 300%;
+      height: 300%;
+      -webkit-transform: scale(0.33);
+      transform: scale(0.33);
+    }
+    @if ($direction == 'all') {
+      border: 1px solid $color;
+    }
+    @if not ($direction == 'all') {
+      border-#{$direction}: 1px solid $color;
+    }
+  }
+}
