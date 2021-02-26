@@ -1,13 +1,18 @@
 import vhCheck from 'vh-check';
 import { Button, Cell, CellGroup } from 'vant';
 import * as filters from '@/utils/filters';
-import { loadVConsoleScript } from '@/utils';
+import { loadVConsoleScript, isLocalDev } from '@/utils';
+
+import usePermission from '@/utils/permission';
 
 const globalConfig = {
   baseSetting: {
-    install(_Vue) {
+    install(Vue) {
+      usePermission();
       vhCheck('browser-address-bar');
-      loadVConsoleScript();
+      !isLocalDev() && loadVConsoleScript();
+      // 不开启生产环境提示
+      Vue.config.productionTip = false;
     },
   },
   components: {

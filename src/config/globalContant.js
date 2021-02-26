@@ -1,3 +1,3 @@
 export const ModelState = {
-  SUCCESS: 0,
+  SUCCESS: 200,
 };

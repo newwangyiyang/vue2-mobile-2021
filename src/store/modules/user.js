@@ -9,7 +9,7 @@ const {
 } = storeMutations;
 
 const userState = {
-  token: 'abc',
+  token: '12',
   userID: '',
   username: '',
   avatarSrc: '',

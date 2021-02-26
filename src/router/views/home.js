@@ -6,6 +6,6 @@ export default {
   component: Home,
   meta: {
     title: '首页',
-    auth: false,
+    auth: true,
   },
 };

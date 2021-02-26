@@ -7,7 +7,6 @@ import 'tailwindcss/tailwind.css';
 import router from './router';
 import store from './store';
 
-Vue.config.productionTip = false;
 // 自定义全局扩展
 Vue.use(globalConfig.baseSetting)
   .use(globalConfig.components)

@@ -46,9 +46,9 @@ _axios.interceptors.request.use(
       cancelQueue.push(c);
     });
     // 从vuex里获取token
-    const token = store.getters.token || s('token');
-    // 如果token存在就在请求头里添加，用户的鉴权操作
-    token && (config.headers.token = token);
+    // const token = store.getters.token || s('token');
+    // // 如果token存在就在请求头里添加，用户的鉴权操作
+    // token && (config.headers.token = token);
     return config;
   },
   function(error) {

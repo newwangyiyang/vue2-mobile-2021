@@ -54,3 +54,11 @@ export const fileToBase64 = (file) => {
     return e.target.result;
   };
 };
+
+/**
+ * 判断是否是本地开发环境
+ */
+export const isLocalDev = () => {
+  const href = window.location.href || window.location.origin;
+  return href.startsWith('http://localhost');
+};
