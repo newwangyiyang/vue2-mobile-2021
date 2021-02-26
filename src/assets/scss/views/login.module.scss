@@ -1,0 +1,15 @@
+@import './../mixins.scss';
+
+.login {
+  @include vh();
+  ::v-deep .van-field__control {
+    color: #fff;
+  }
+  .swipe {
+    transform: translate3d(0, 0, 0);
+    overflow: hidden;
+    .swipe-item {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}

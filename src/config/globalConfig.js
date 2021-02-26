@@ -1,5 +1,5 @@
 import vhCheck from 'vh-check';
-import { Button, Cell, CellGroup } from 'vant';
+import { Button, Cell, CellGroup, Lazyload, Field, Form, Image, Divider } from 'vant';
 import * as filters from '@/utils/filters';
 import { loadVConsoleScript, isLocalDev } from '@/utils';
 
@@ -19,7 +19,12 @@ const globalConfig = {
     install(Vue) {
       Vue.use(Button)
         .use(Cell)
-        .use(CellGroup);
+        .use(CellGroup)
+        .use(Lazyload)
+        .use(Form)
+        .use(Field)
+        .use(Image)
+        .use(Divider);
     },
   },
   filters: {

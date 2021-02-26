@@ -61,7 +61,7 @@ module.exports = {
             minRatio: 0.8,
             test: /\.js$|\.html$|\.css$/, // 匹配文件名
             threshold: 4096, // 超过4k进行压缩
-            deleteOriginalAssets: true, // 是否删除源文件
+            deleteOriginalAssets: false, // 是否删除源文件
           },
         ]);
       // 4、去掉空格，减少打包体积

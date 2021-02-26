@@ -9,7 +9,7 @@
 - `vant`: 按需加载
 
   - `babel-plugin-import`
-  - 这里无需额外引入全局css样式
+  - 这里无需额外引入全局 css 样式
 
   ```js
   // babel.config.js
@@ -18,32 +18,31 @@
     plugins: [['import', { libraryName: 'vant', libraryDirectory: 'es', style: true }, 'vant']],
   };
   ```
+
   - 将`vant`组件局部注册
 
-    - 要用到组件的name属性
+    - 要用到组件的 name 属性
     - `{[Button.name]: Button}`
 
     ```vue
     <template>
-    	<van-button type="primary" size="large">按钮</van-button>
+      <van-button type="primary" size="large">按钮</van-button>
     </template>
     <script>
     import { Button } from 'vant';
-      
+
     export default {
       name: 'Home',
       components: {
-        [Button.name]: Button
-      }
-    }
+        [Button.name]: Button,
+      },
+    };
     </script>
     ```
 
-    
+* `viewport`
 
-- `viewport`
-
-  - [git地址](https://github.com/evrone/postcss-px-to-viewport/blob/master/README_CN.md)
+  - [git 地址](https://github.com/evrone/postcss-px-to-viewport/blob/master/README_CN.md)
 
   - `autoprefixer`、`postcss-px-to-viewport`
 
@@ -51,7 +50,7 @@
     // vue.config.js
     const autoprefixer = require('autoprefixer');
     const pxtoviewport = require('postcss-px-to-viewport');
-    
+
     module.exports = {
       outputDir: 'dist',
       publicPath: process.env.NODE_ENV === 'production' ? '/vant-demo/' : '/',
@@ -75,21 +74,21 @@
                 minPixelValue: 1,
                 // 允许在媒体查询中转换`px`
                 mediaQuery: false,
-              })
-            ]
-          }
-        }
-      }
+              }),
+            ],
+          },
+        },
+      },
     };
     ```
 
 ### 3. `vh-check`
 
-- 处理 safari/chrome 浏览器工具栏TopBar 100vh 问题
+- 处理 safari/chrome 浏览器工具栏 TopBar 100vh 问题
 
-  - 实际100vh高度会超过屏幕高度，跟预期不一致
+  - 实际 100vh 高度会超过屏幕高度，跟预期不一致
 
-- [git地址](https://github.com/Hiswe/vh-check)
+- [git 地址](https://github.com/Hiswe/vh-check)
 
   ```vue
   <script>
@@ -99,8 +98,8 @@
   export default {
     render(h) {
       return h('div', { class: { home: true } });
-    }
-  }
+    },
+  };
   </script>
   <style lang="scss" scoped>
   @mixin vh($height: 100vh) {
@@ -111,13 +110,19 @@
     @include vh();
   }
   </style>
-  
-  
   ```
 
 ### 4. `tailwindcss`
 
 - 原子类封装
+
+- 推荐使用`::v-deep`重置组件样式
+
+  ```scss
+  ::v-deep .van-field__control {
+    color: #fff;
+  }
+  ```
 
 - 依赖项
 
@@ -133,6 +138,5 @@
 
 ### 5. 打包优化
 
-- gzip压缩需注意插件版本: `*"compression-webpack-plugin"*: "^6.1.1"`
+- gzip 压缩需注意插件版本: `*"compression-webpack-plugin"*: "^6.1.1"`
   - 最新版会报错
-
